@@ -155,19 +155,20 @@ $isRecord = count($teacherRecord) > 0 ? true : false;
           
               
           <?php }?>
+            
           <?php
           }
         
 
         ?>
-
-
+      
       
       </tbody>
 
-      <tr id='teacherNoResult' class='hidden'>
-                  <td colspan='10' class='text-center text-gray-500'>No match found</td>
-      </tr>
+          <tr id='teacherNoResult'>
+            <td colspan='10' class='text-gray-500 font-semibold'>No match found!</td>
+          </tr>
+
 
     </table>
 
@@ -244,22 +245,30 @@ $isRecord = count($teacherRecord) > 0 ? true : false;
 
     <hr />
 
+    <?php
 
-     <div class='flex justify-end gap-2 pr-5 items-center'>
-      
-      <span>
-        <button id='viewTeacherPrevBtn' onclick='prevBtn(".teacher-table","teacherNoResult","viewTeacherPrevBtn", "viewTeacherNextBtn", "viewTeacherPageCount")'
-          class='prev btn btn-blue-500 p-2 text-gray-500 rounded'>Prev</button>
-      </span>
-      <span> |</span>
-      <span class="text-gray-500" id='viewTeacherPageCount'> 1</span>
-      <span> |</span>
-      <span>
-        <button id='viewTeacherNextBtn' onclick='nextBtn(".teacher-table","teacherNoResult","viewTeacherPrevBtn", "viewTeacherNextBtn", "viewTeacherPageCount")'
-          class='next btn btn-blue-500 p-2 text-gray-500 rounded'>Next</button>
-      </span>
-      </dv>
-    </div>
+        if($isRecord){
+          ?>
+          
+          <div class='flex justify-end gap-2 pr-5 items-center'>
+            
+            <span>
+              <button id='viewTeacherPrevBtn' onclick='prevBtn(".teacher-table","teacherNoResult","viewTeacherPrevBtn", "viewTeacherNextBtn", "viewTeacherPageCount")'
+                class='prev btn btn-blue-500 p-2 text-gray-500 rounded'>Prev</button>
+            </span>
+            <span> |</span>
+            <span class="text-gray-500" id='viewTeacherPageCount'> 1</span>
+            <span> |</span>
+            <span>
+              <button id='viewTeacherNextBtn' onclick='nextBtn(".teacher-table","teacherNoResult","viewTeacherPrevBtn", "viewTeacherNextBtn", "viewTeacherPageCount")'
+                class='next btn btn-blue-500 p-2 text-gray-500 rounded'>Next</button>
+            </span>
+            </dv>
+          </div>
+          <?php
+        }
+    ?>
+
 
 
 
@@ -420,81 +429,6 @@ $isRecord = count($teacherRecord) > 0 ? true : false;
                    </div>
                 </fieldset>
        
-              
-                <!-- <fieldset class=' teacherFieldset'>
-                          <legend>Subject Chosen</legend>
-                  <div class="subjectContainer">
-                      <div  class="subjectItem flex justify-between gap-2 mb-2">
-
-                                <input type="hidden" name="teacherRecordId0" id='teacherRecordId0' class='teach-rec'>
-                                        
-                                  <div class="w-5/12 flex flex-col gap-2 items-center">
-                                            <select id="teacherSubjectChosen0" name='teacherSubjectChosen0' class="subject-list bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
-                                            
-                                              <option value=""></option>
-                                            <?php
-
-                                              
-                                                  foreach ($subjectList as $subject) {
-                      
-
-                                                    ?>
-                                                        
-                                                        <option value="<?php echo $subject['id'] ?>"> <?php echo $subject['name'] ?></option>
-                                                                    
-                          
-                          
-                          
-                                                        <?php
-
-                                                  }
-
-
-                                                  ?>
-                                          </select>
-                                      </div>
-
-
-                                        <div class="w-5/12 flex flex-col gap-2 items-center mb-2">
-                                          <select id="teacherYearLevel0" name='teacherYearLevel0' class="level-list bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
-                                            
-                                              <option value=""></option>
-                                            <?php
-
-                                              
-                                                  foreach ($gradeLevel as $grade) {
-                      
-
-                                                    ?>
-                                                        
-                                                        <option value="<?php echo $grade['id'] ?>"> <?php echo $grade['name'] ?></option>
-                                                                    
-                      
-                                                <?php
-
-                                                  }
-
-
-                                                  ?>
-                                        </select>
-                                      
-                                  </div>
-                                  
-                                      <div id='btnSubjectCont' class="w-2/12 flex flex-col gap-2 items-center button-item">
-                                        <label for='teacherYearLevel'><button  type='submit' class="appendSubject btn bg-blue-600 text-white px-5 py-2 rounded">+</button></label>
-                                      </div>
-
-                              </div>
-
-                  </div>
-
-
-            
-                   <div id='onreadytoSubmit' class="flex justify-between items-center mt-5 hidden">
-                     <button id='teachPrevBtn__3' type="button" class="w-[10rem] text-white bg-cyan-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Previous</button>
-                     <button id='teachNextBtn__3'  class="w-[10rem] text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
-                     </div>
-               </fieldset> -->
             </form>
           </div>
         </div>

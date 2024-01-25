@@ -159,7 +159,7 @@ $getStudentEnrolledName = $controller->getEnrolleUserName();
 
    <!-- create center no match found -->
         <tr id='att_NoResult'>
-          <td colspan='7' class='text-center text-gray-500'>No match found</td>
+          <td colspan='7' class='text-center text-gray-500 font-semibold'>No match found</td>
       </tr>
     <?php
 } 

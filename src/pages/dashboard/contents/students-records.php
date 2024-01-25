@@ -6,6 +6,8 @@
 <?php
 use Biometric\Controller\ControllerManager;
 
+
+
 $controller = new ControllerManager();
 
 
@@ -17,9 +19,10 @@ $getSchoolYear = $controller->getSchoolYear();
 $getMasterStudentRecord = $controller->getMasterStudentsRecord();
 
 
-$totalEnroll = count($enrollmentRecord);
 
-$totalStudents = count($getMasterStudentRecord);
+$totalEnroll = count($enrollmentRecord) > 0 ? true : false;
+
+$totalStudents = count($getMasterStudentRecord) > 0 ? true : false;
 // getschoolyear
 // $schoolYear = "SY-{$getSchoolYear['start_date']}-{$getSchoolYear['end_date']}";
 $startYear = date('Y', strtotime($getSchoolYear['start_date']));

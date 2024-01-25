@@ -47,7 +47,7 @@
        </div>
       </div> -->
 
-<form method="post" action="" id="myForm">
+<form method="post" action="" >
     <input type="hidden" name="getRecentYear" id="getRecentYear" value="<?php echo date('Y') ?>">
   <!-- Other form elements go here -->
 </form>
@@ -130,7 +130,7 @@
       </thead>
     <?php
 
-    if ($totalStudents > 0) {
+    if ($totalStudents) {
       ?>
              <tbody>
 
@@ -231,7 +231,7 @@
       ?>
           <tbody>
               <tr id='studentRecNoResult'>
-                  <td colspan='7' class='text-gray-500 font-semibold'>No match found!</td>
+                  <td colspan='10' class='text-gray-500 font-semibold'>No match found!</td>
               </tr>
           </tbody>
       
@@ -319,6 +319,11 @@
 
   <hr />
 
+
+  <?php
+    if($totalStudents){
+      ?>
+      
     <div class='flex justify-end gap-2 pr-5 items-center'>
       
       <span>
@@ -335,6 +340,10 @@
       </dv>
     </div>
 
+      <?php
+    }
+
+?>
 
 
     <!-- end printing code -->
@@ -359,7 +368,15 @@
   </div>
 </div>
 
+<?php
 
-<div class='master-view hidden'>
+        if($totalStudents){
+          ?>
+          
+      <div class='master-view hidden'>
      <?php include('master-list-view.php') ?>
-</div>
+            </div>
+          <?php
+        }
+
+?>

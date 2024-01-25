@@ -5,6 +5,10 @@ use Biometric\Controller\ControllerManager;
 $controller = new ControllerManager();
 
 
+
+
+
+
 $yearLevel = $controller->getYearLevel();
 
 $sections = $controller->getSections();

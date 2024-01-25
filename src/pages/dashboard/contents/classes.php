@@ -161,7 +161,7 @@ $getClassRec = $controller->getClassRecords();
 
   <!-- create center no match found -->
   <tr id='classesNoResult' class='hidden'>
-    <td colspan='11' class='text-center text-gray-500'>No match found</td>
+    <td colspan='11' class='text-center text-gray-500 font-semibold'>No match found</td>
   </tr>
 </tbody>
 

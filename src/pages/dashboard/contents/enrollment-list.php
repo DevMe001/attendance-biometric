@@ -73,8 +73,8 @@
        </div>
       </div> -->
 
-<form method="post" action="" id="myForm">
-    <input type="hidden" name="getRecentYear" id="getRecentYear" value="<?php echo date('Y') ?>">
+<form method="post" action="">
+    <input type="hidden" name="getRecentYear" id="getRecentYearEnroll" value="<?php echo date('Y') ?>">
   <!-- Other form elements go here -->
 </form>
 
@@ -102,7 +102,7 @@
           
          <div id='filterPerYear' class="flex justify-end item-center gap-4 mb-4">
             <label for="getRecYearly" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white uppercase">Year</label>
-            <select style='width:200px;' id="getRecYearly"  class="selectItem2Lib bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+            <select style='width:200px;' id="getRecYearlyEnroll"  class="selectItem2Lib bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
           <?php
 
 
@@ -152,7 +152,7 @@
       </thead>
     <?php
 
-    if ($totalEnroll > 0) {
+    if ($totalEnroll) {
       ?>
            <tbody>
 
@@ -326,46 +326,61 @@
 
 
 
+      <?php
+        if($totalEnroll){
+          ?>
+          
+        <div class='flex justify-end gap-2 pr-5 items-center'>
+          
+          <span>
+            <button id='viewemrolledlistPrevBtn' onclick='prevBtn(".enroll-table","enrollRecNoResult","viewemrolledlistPrevBtn", "viewemrolledlistNextBtn", "viewemrolledlistPageCount")'
+              class='prev btn btn-blue-500 p-2 text-gray-500 rounded'>Prev</button>
+          </span>
+          <span> |</span>
+          <span class="text-gray-500" id='viewemrolledlistPageCount'>1</span>
+          <span> |</span>
+          <span>
+            <button id='viewemrolledlistNextBtn' onclick='nextBtn(".enroll-table","enrollRecNoResult","viewemrolledlistPrevBtn", "viewemrolledlistNextBtn", "viewemrolledlistPageCount")'
+              class='next btn btn-blue-500 p-2 text-gray-500 rounded'>Next</button>
+          </span>
+          </dv>
+        </div>
 
-    <div class='flex justify-end gap-2 pr-5 items-center'>
-      
-      <span>
-        <button id='viewemrolledlistPrevBtn' onclick='prevBtn(".enroll-table","enrollRecNoResult","viewemrolledlistPrevBtn", "viewemrolledlistNextBtn", "viewemrolledlistPageCount")'
-          class='prev btn btn-blue-500 p-2 text-gray-500 rounded'>Prev</button>
-      </span>
-      <span> |</span>
-      <span class="text-gray-500" id='viewemrolledlistPageCount'>1</span>
-      <span> |</span>
-      <span>
-        <button id='viewemrolledlistNextBtn' onclick='nextBtn(".enroll-table","enrollRecNoResult","viewemrolledlistPrevBtn", "viewemrolledlistNextBtn", "viewemrolledlistPageCount")'
-          class='next btn btn-blue-500 p-2 text-gray-500 rounded'>Next</button>
-      </span>
-      </dv>
-    </div>
 
-
+          <?php
+        }
+        
+      ?>
 
     <!-- end printing code -->
 
+<?php
 
-<div>
-    <?php
-    $sectionListArray = array();
+        if($totalEnroll){
+          ?>
+          <div>
+        <?php
+                $sectionListArray = array();
 
-    if (count($sections) > 0) {
-        foreach ($sections as $rec) {
-            // Convert each section record to JSON
-            $sectionRec = json_encode($rec);
+              if (count($sections) > 0) {
+                foreach ($sections as $rec) {
+                  // Convert each section record to JSON
+                  $sectionRec = json_encode($rec);
 
-            // Append the JSON string to the array
-            $sectionListArray[] = $sectionRec;
+                  // Append the JSON string to the array
+                  $sectionListArray[] = $sectionRec;
 
+                }
+              }
+              ?>
+          
+              <input type="hidden" id='getListSections' value="<?php echo htmlspecialchars(json_encode($sectionListArray)); ?>" />
+            </div>
+          <?php
         }
-    }
-    ?>
 
-    <input type="hidden" id='getListSections' value="<?php echo htmlspecialchars(json_encode($sectionListArray)); ?>" />
-</div>
+?>
+
 
 
 

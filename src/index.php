@@ -2,6 +2,8 @@
 namespace Biometric\Helper;
 
 
+
+
 session_start();
 if (isset($_SESSION['users']['username']) && isset($_GET['page'])) {
     $page = $_GET['page'];

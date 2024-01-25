@@ -210,10 +210,16 @@ function showPageCount(table, prevId, nextId, pageCount, noResult) {
 
 	const totalPage = Math.ceil(totalRow / itemPerPage);
 
-	pageCountText.textContent = `${currentPage} / ${totalPage}`;
+	console.log(totalPage,'get rec');
 
-	prevId.disabled = currentPage == 1;
-	nextId.disabled = currentPage == totalPage;
+	if(totalPage > 0){
+		pageCountText.textContent = `${currentPage} / ${totalPage}`;
+
+
+		prevId.disabled = currentPage == 1;
+		nextId.disabled = currentPage == totalPage;
+	}
+
 }
 
 
@@ -236,16 +242,20 @@ function showPageCount(table, prevId, nextId, pageCount, noResult) {
 
 
 
+		console.log(tbodyRow, 'length table');
+		console.log(noResult, 'length table');
 		
 			const notFound = document.getElementById(noResult);
 
-			if (tbodyRow.length > 1) {
+			if (tbodyRow.length > 0) {
 				const startIndex = (currentPage - 1) * itemPerPage;
 				const endIndex = startIndex + itemPerPage;
 
 				for (let i = 0; i < tbodyRow.length; i++) {
 
 					tbodyRow[i].classList.toggle('hidden', i < startIndex || i >= endIndex);
+					notFound.classList.add('hidden');
+
 				}
 			} else {
 				notFound.classList.remove('hidden');

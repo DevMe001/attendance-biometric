@@ -1,5 +1,5 @@
 const teacherTable = '.teacher-table';
-const teacherNoTesult = 'teacherNoResult';
+const teacherNoResult = 'teacherNoResult';
 
 // menu
 const teacherMenu = '#teacherDropdownMenu';
@@ -15,17 +15,17 @@ const teacherPrint = 'teacherPrint';
 const teacherPageArea = '.teacher-printable';
 
 // getMenu(teacherMenu, teacherTable);
-showPageCount(teacherTable, 'viewTeacherPrevBtn', 'viewTeacherNextBtn', 'viewTeacherPageCount', teacherNoTesult);
+showPageCount(teacherTable, 'viewTeacherPrevBtn', 'viewTeacherNextBtn', 'viewTeacherPageCount', teacherNoResult);
 
-showPage(teacherTable, teacherNoTesult);
-// tableSorting(teacherMenu, teacherTable, teacherNoTesult);
+showPage(teacherTable, teacherNoResult);
+// tableSorting(teacherMenu, teacherTable, teacherNoResult);
 
 let teacherSearchEl = document.getElementById(teacherSearchId);
 
 teacherSearchEl.addEventListener('keyup', (e) => {
 	let searchValue = e.target.value.toLowerCase();
 
-	filterTable(teacherTable, teacherNoTesult, searchValue);
+	filterTable(teacherTable, teacherNoResult, searchValue);
 });
 
 $('#' + teacherPrint).on('click', (e) => {

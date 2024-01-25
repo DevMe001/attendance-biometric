@@ -46,8 +46,8 @@
        </div>
       </div> -->
 
-<form method="post" action="" id="myForm">
-    <input type="hidden" name="getRecentYear" id="getRecentYear" value="<?php echo date('Y') ?>">
+<form method="post" action="" >
+    <input type="hidden" name="getRecentYear" id="getRecentYearCopy" value="<?php echo date('Y') ?>">
   <!-- Other form elements go here -->
 </form>
 

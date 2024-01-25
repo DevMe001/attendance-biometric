@@ -806,7 +806,7 @@ $tableFields = [
         if($totalCount == 0){
           ?>
             <tr>
-              <td colspan='7' class='text-center text-gray-500'>No archive <?php echo strtolower($currenLabel) ?> found</td>
+              <td colspan='7' class='text-center text-gray-500 font-semibold'>No archive <?php echo strtolower($currenLabel) ?> found</td>
             </tr>
           <?php
         }
@@ -819,7 +819,7 @@ $tableFields = [
 
 
      <tr id='archiveNoResult' class='hidden'>
-          <td colspan='7' class='text-center text-gray-500'>No match found</td>
+          <td colspan='7' class='text-center text-gray-500 font-semibold'>No match found</td>
       <tr/>
       
     </table>

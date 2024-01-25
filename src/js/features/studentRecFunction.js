@@ -155,7 +155,10 @@ $('#' + studentReciept).on('click', (e) => {
 $(document).ready(function () {
 	var schoolYearInput = $('#getRecentYear');
 	var yearDropdown = $('#getRecYearly');
-
+	var getRecentYearEnroll = $('#getRecentYearEnroll');
+	var enrollDropdown =  $('#getRecYearlyEnroll');
+	
+	
 
 	// Event listener for dropdown change
 	yearDropdown.change(function () {
@@ -163,6 +166,14 @@ $(document).ready(function () {
 			localStorage.setItem('data', JSON.stringify({ id: '#tab1', action: ''}));
 
 	});
+	
+
+	enrollDropdown.change(function () {
+		location.href = `?page=dashboard&filteredYear=${this.value}`;
+			localStorage.setItem('data', JSON.stringify({ id: '#tab1', action: ''}));
+
+	});
+
 });
 
 // $('#getRecYearly').on('change',function(){
