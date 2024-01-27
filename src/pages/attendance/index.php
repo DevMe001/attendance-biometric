@@ -9,7 +9,7 @@ $controller = new ControllerManager();
 
 $getStudentEnrolledName = $controller->getEnrolleUserLrn();
 
-
+$getStudenEnrollmentCount = $getStudentEnrolledName != null && count($getStudentEnrolledName) > 0;
 
 ?>
 
@@ -28,7 +28,6 @@ $getStudentEnrolledName = $controller->getEnrolleUserLrn();
 
     <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
-
   <style>
     .custom-border {
       border: 1px solid;
@@ -97,6 +96,13 @@ $getStudentEnrolledName = $controller->getEnrolleUserLrn();
     }
 
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $('#ontoggleAttendance').click();
+        });
+    </script>
 </head>
 
 <body>
@@ -135,7 +141,7 @@ $getStudentEnrolledName = $controller->getEnrolleUserLrn();
 
     
   
-  <button id='ontoggleAttendance' data-modal-target="verify-modal" data-modal-toggle="verify-modal" class='text-center py-3 font-bold text-md'>+</button>
+  <button  id='ontoggleAttendance' data-modal-target="verify-modal" data-modal-toggle="verify-modal" class='text-center py-3 font-bold text-md'></button>
 
   </div>
  
@@ -157,13 +163,17 @@ $getStudentEnrolledName = $controller->getEnrolleUserLrn();
           </button>
           <div class="px-6 py-6 lg:px-8">
         
-            <form id='attendanceListForm' class="space-y-6">
-               <fieldset class='attendance_enroll'>
-
+          
               
                       <!-- get username of enrolle student -->
                    
-                  <div>
+                 <?php
+                  if($getStudenEnrollmentCount){
+                    ?>
+                      <form id='attendanceListForm' class="space-y-6">
+                     <fieldset class='attendance_enroll'>
+
+                     <div>
                            <label for="attendanceName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Student's name</label>
                            <select style="width:100%;" id="attendanceName" name='enrolled_id' class="selectItem2Lib px-5 py-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                           
@@ -188,8 +198,25 @@ $getStudentEnrolledName = $controller->getEnrolleUserLrn();
 
                                 ?>
                           </select>
+
+                            <div class='flex justify-center items-center w-full my-5'>
+                           <input  id='attendanceNextBtn__1' type='submit' class="btn bg-indigo-900 text-white rounded font-medium px-10 py-3"  value="Proceed">
+
+                          </div>
                   </div>
 
+                                
+                 </fieldset> 
+                 </form>
+
+                    <?php
+                  }else{
+                    ?>
+                    <div class='text-center font-semibold text-xl text-red-500'>No student enrolled</div>
+                    <?php
+                  }
+
+                  ?>
 
                   <!-- <div class='mt-2'>
                            <label for="clockType" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Clock type</label>
@@ -203,12 +230,8 @@ $getStudentEnrolledName = $controller->getEnrolleUserLrn();
                   </div> -->
                       <!-- end enrolled students -->
 
-                    <div class='flex justify-center items-center w-full my-5'>
-                    <input  id='attendanceNextBtn__1' type='submit' class="btn bg-indigo-900 text-white rounded font-medium px-10 py-3"  value="Proceed">
-
-                    </div>
-               </fieldset> 
-            </form>
+             
+          
           </div>
         </div>
       </div>
@@ -223,11 +246,13 @@ $getStudentEnrolledName = $controller->getEnrolleUserLrn();
   <script src='<?php echo baseUrlScriptSrc('/js/es6-shim.js') ?>'></script>
   <script src='<?php echo baseUrlScriptSrc('/js/websdk.client.bundle.min.js') ?>'></script>
   <script src='<?php echo baseUrlScriptSrc('/js/fingerprint.sdk.min.js') ?>'></script>
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+
 
   <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-form@4.3.0/dist/jquery.form.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
 
 
   <script src='<?php echo baseUrlScriptSrc('/js/features/httpFunction.js') ?>'></script>

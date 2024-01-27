@@ -1337,6 +1337,7 @@ let editable = false;
 		
 		}
 
+
 		
 		if (validate == false) {
 			optionItem = '<option value="0" selected >No section found</option>';
