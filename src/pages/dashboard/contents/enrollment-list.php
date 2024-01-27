@@ -356,13 +356,14 @@
 
 <?php
 
-        if($totalEnroll){
+        if($totalStudents){
           ?>
           <div>
         <?php
                 $sectionListArray = array();
+              $getSectionCountList = $sections !== null && count($sections) > 0;
 
-              if (count($sections) > 0) {
+              if ($getSectionCountList) {
                 foreach ($sections as $rec) {
                   // Convert each section record to JSON
                   $sectionRec = json_encode($rec);
@@ -372,7 +373,12 @@
 
                 }
               }
+
+
+
               ?>
+
+            
           
               <input type="hidden" id='getListSections' value="<?php echo htmlspecialchars(json_encode($sectionListArray)); ?>" />
             </div>

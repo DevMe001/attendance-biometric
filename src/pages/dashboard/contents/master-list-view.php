@@ -40,23 +40,26 @@
 <?php
 
 $classDetails = array();
+$getSectionCount = $sections !== null && count($sections) > 0;
 
-  if(count($sections) > 0){
-    foreach($sections as $res){
-      $class = json_encode($res);
-
-      $classDetails[] = $class;
-    }
+if ($getSectionCount) {
+  foreach ($sections as $res) {
+    $class = json_encode($res);
+    $classDetails[] = $class;
   }
+}
 
 $enrollmentList = array();
-if (count($enrollmentRecord) > 0) {
+$getEnrollmentCount = $enrollmentRecord !== null && count($enrollmentRecord) > 0;
+
+if ($getEnrollmentCount) {
   foreach ($enrollmentRecord as $res) {
     $enroll = json_encode($res);
-
     $enrollmentList[] = $enroll;
   }
 }
+
+
 
 ?>
   <input type="hidden" id='getClassDetails' value='<?php echo htmlspecialchars(json_encode($classDetails)) ?>' />

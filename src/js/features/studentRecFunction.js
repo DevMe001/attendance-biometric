@@ -558,21 +558,28 @@ $('#editMasterList').on('click', function () {
 
 // section by class details 
 
-				let listClassDetails = JSON.parse($('#getClassDetails').val());
+				let listClassDetails = $('#getClassDetails').val();
+				
+		
+
+				console.log(listClassDetails,'get classe details');
 
 				let validate =false;
 				let classUnique = [];
 
-					if (listClassDetails.length > 0) {
+		
+
+					if (listClassDetails) {
+
+							let getClassDetails = 	JSON.parse($('#getClassDetails').val()) ?? 0;
 					
-						listClassDetails.forEach((item) => {
+						getClassDetails.forEach((item) => {
 							let details = JSON.parse(item);
 
-								classUnique.push({
-									yearId: details.yearId,
-									yearName: details.yearName,
-								});
-						
+							classUnique.push({
+								yearId: details.yearId,
+								yearName: details.yearName,
+							});
 						});
 
 
@@ -644,52 +651,43 @@ $('#editMasterList').on('click', function () {
 
 					// get enrollement status
 
-					let getEnrollmentDetails = JSON.parse($('#getEnrollmentValue').val());
+					let getEnrollmentDetails = $('#getEnrollmentValue').val();
 
 					let status = '( Pending )'
 
-					if(getEnrollmentDetails.length > 0){
+					if(getEnrollmentDetails){
 
+						let getClassEnrollmentInput = JSON.parse($('#getEnrollmentValue').val());
 							let sectionList = '<option value=""></option>';
 							let validateSection= false;
 							let getSectionId = '';
 
-								getEnrollmentDetails.forEach((enroll) =>{
+								getClassEnrollmentInput.forEach((enroll) => {
 									let item = JSON.parse(enroll);
 
-									if(item.student_id == data.id){
+									if (item.student_id == data.id) {
 										status = '( Enrolled )';
 
-
-										console.log(item,'enrollment section');
-
+										console.log(item, 'enrollment section');
 
 										getSectionId = item.sectionId;
-						
 									}
-							
-
 								});
 
 					let getSpecificSection = [];
 
-						listClassDetails.forEach((item) => {
-							let details = JSON.parse(item);
-					
+								if(getClassDetails){
+										listClassDetails.forEach((item) => {
+											let details = JSON.parse(item);
 
-							if (details.year_level == data.yearId) {
-
-			
-								getSpecificSection.push({
-									sectionId: details.sectionId,
-									sectionName: details.sectionName,
-								});
-							
-
-
-
-							} 
-						});
+											if (details.year_level == data.yearId) {
+												getSpecificSection.push({
+													sectionId: details.sectionId,
+													sectionName: details.sectionName,
+												});
+											}
+										});
+								}
 
 
 						const getUniqueSection = [... new Map(getSpecificSection.map(v => [v.sectionId,v])).values()];
@@ -743,12 +741,14 @@ $('#editMasterList').on('click', function () {
 
 			console.log(selectedValue,'get selected level');
 
-					let getEnrollmentDetails = JSON.parse($('#getEnrollmentValue').val());
-				let listClassDetails = JSON.parse($('#getClassDetails').val());
+					let getEnrollmentDetails = $('#getEnrollmentValue').val();
+				
+				let listClassDetails = $('#getClassDetails').val();
 
 		
 
-					if (getEnrollmentDetails.length > 0) {
+					if (getEnrollmentDetails) {
+						let getnrollmentInput =	JSON.parse($('#getEnrollmentValue').val());
 						let sectionList = '<option selected value=""></option>';
 						let validateSection = false;
 						let getSectionId = '';
@@ -756,16 +756,22 @@ $('#editMasterList').on('click', function () {
 			
 						let getSpecificSection = [];
 
-						listClassDetails.forEach((item) => {
-							let details = JSON.parse(item);
+						if(listClassDetails){
+						let getClassDetails = JSON.parse($('#getClassDetails').val()) ?? 0;
 
-							if (details.year_level == selectedValue) {
-								getSpecificSection.push({
-									sectionId: details.sectionId,
-									sectionName: details.sectionName,
-								});
-							}
-						});
+										getClassDetails.forEach((item) => {
+											let details = JSON.parse(item);
+
+											if (details.year_level == selectedValue) {
+												getSpecificSection.push({
+													sectionId: details.sectionId,
+													sectionName: details.sectionName,
+												});
+											}
+										});
+
+						}
+					
 
 						const getUniqueSection = [...new Map(getSpecificSection.map((v) => [v.sectionId, v])).values()];
 
@@ -1297,15 +1303,18 @@ let editable = false;
 		console.log(data,'get details');
 		
 
-		let getClassSectionByYearLvl = JSON.parse($('#getListSections').val());
+		let getClassSectionByYearLvl = $('#getListSections').val();
 
 		let validate = false;
 
-
-
-		if(getClassSectionByYearLvl.length > 0){
-		
 			let optionItem = '<option value=""></option>';
+
+
+		if(getClassSectionByYearLvl){
+
+		let getClassSectionByYearLvl = JSON.parse($('#getListSections').val()) ?? null;
+
+		
 
 			getClassSectionByYearLvl.forEach((item) => {
 				let parseItem = JSON.parse(item);
@@ -1325,33 +1334,35 @@ let editable = false;
 
 				} 
 			});
-
-			if(validate == false){
-						optionItem = '<option value="0" selected >No section found</option>';
-						$('#msgSection').text(`No section defined ${data.yearLevel} in classes page`);
-			
-						Swal.fire({
-							icon: 'error',
-							title: 'Level not found in classes', 
-							text: `Create ${data.yearLevel} class  before to proceed`,
-							showCancelButton: false,
-							confirmButtonText: 'Go to classes now',
-							confirmButtonColor: '#3085d6',
-							allowOutsideClick: false,
-						}).then((result) => {
-							if (result.isConfirmed) {
-								// Redirect to the specified page
-								window.location.href = '?page=dashboard';
-								localStorage.setItem('data', JSON.stringify({ id: '#tab5', action: '', message: '' }));
-							}
-						});
-			}else{
-						$('#newSection').show();
-						$('#msgSection').hide();
-			}
-
-			$('#newSection').empty().append(optionItem);
+		
 		}
+
+		
+		if (validate == false) {
+			optionItem = '<option value="0" selected >No section found</option>';
+			$('#msgSection').text(`No section defined ${data.yearLevel} in classes page`);
+
+			Swal.fire({
+				icon: 'error',
+				title: 'Level not found in classes',
+				text: `Create ${data.yearLevel} class  before to proceed`,
+				showCancelButton: false,
+				confirmButtonText: 'Go to classes now',
+				confirmButtonColor: '#3085d6',
+				allowOutsideClick: false,
+			}).then((result) => {
+				if (result.isConfirmed) {
+					// Redirect to the specified page
+					window.location.href = '?page=dashboard';
+					localStorage.setItem('data', JSON.stringify({ id: '#tab5', action: '', message: '' }));
+				}
+			});
+		} else {
+			$('#newSection').show();
+			$('#msgSection').hide();
+		}
+
+		$('#newSection').empty().append(optionItem);
 
 				
 		$(studentRecToggle).click();
@@ -2227,59 +2238,53 @@ $('#searchBtnRefNumber').on('click', function () {
 			});
 		}
 
-				let listSection = JSON.parse($('#getListSections').val());
+				let getSectionValue = $('#getListSections').val();
 
 				let validate =false;
 
-					if(listSection.length > 0){
+					if (getSectionValue) {
+						let listSection = JSON.parse($('#getListSections').val());
+
 						let listitems = '<option value=""></option>';
 						listSection.forEach((item) => {
-
-
 							let details = JSON.parse(item);
 
 							console.log(details.year_level, 'get item');
 
 							if (details.year_level == data.yearId) {
-
-								validate =true;
+								validate = true;
 								listitems += '<option value="' + details.sectionId + '" >' + details.sectionName + '</option>';
-							} 
-							
+							}
 						});
 
-						if(validate == false){
-								listitems = '<option value="0" selected >No section found</option>';
-								$('#msgSection').text(`No section defined ${data.yearName} in classes page`);
+						if (validate == false) {
+							listitems = '<option value="0" selected >No section found</option>';
+							$('#msgSection').text(`No section defined ${data.yearName} in classes page`);
 
-								$('#newSection').hide();
+							$('#newSection').hide();
 
-								Swal.fire({
-									icon: 'error',
-									title: 'Section not found',
-									text: `Create ${data.yearName} class before to proceed`,
-									showCancelButton: false,
-									confirmButtonText: 'Go to classes now',
-									confirmButtonColor: '#3085d6',
-									allowOutsideClick: false,
-								}).then((result) => {
-									if (result.isConfirmed) {
-										// Redirect to the specified page
-										window.location.href = '?page=dashboard';
-										localStorage.setItem('data', JSON.stringify({ id: '#tab5', action: '', message: '' }));
-									}
-								});
-
-
-						}else{
-								$('#newSection').show();
-								$('#msgSection').hide();
-
+							Swal.fire({
+								icon: 'error',
+								title: 'Section not found',
+								text: `Create ${data.yearName} class before to proceed`,
+								showCancelButton: false,
+								confirmButtonText: 'Go to classes now',
+								confirmButtonColor: '#3085d6',
+								allowOutsideClick: false,
+							}).then((result) => {
+								if (result.isConfirmed) {
+									// Redirect to the specified page
+									window.location.href = '?page=dashboard';
+									localStorage.setItem('data', JSON.stringify({ id: '#tab5', action: '', message: '' }));
+								}
+							});
+						} else {
+							$('#newSection').show();
+							$('#msgSection').hide();
 						}
 
 						$('#newSection').append(listitems);
-
-				}
+					}
 
 
 					
